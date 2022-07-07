@@ -1,0 +1,66 @@
+
+<div style="margin-top: 85px;">  <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Orders</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Item</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+      <th scope="col">Type of Order</th>
+      <th scope="col">Address</th>
+      <th scope="'col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orders}}
+    <tr>
+        
+      <th scope="row">{{math @index "+"1}}</th>
+      <td><img style="width: 50px; height:50px" src="/images/{{this.product.image}}"></td>
+      <td>{{this.product.productname}}</td>
+      <td>{{this.product.price}}</td>
+      <td>{{this.quantity}}</td>
+      <td>{{this.subtotal}}</td>
+      
+      <td>{{this.paymentMethod}}</td>
+      <td>{{this.address}}</td>
+      <td>{{this.status}}</td>
+      {{#ifCound this.status 'Placed'}}
+      
+      <td>
+      <a href="/cancel-order/{{this._id}}" onclick= " return confirm('are you sure to cancel {{this.name}}')" class="btn btn-danger">Cancel</a>
+      </td>
+        {{else}}{{#ifCound this.status 'DELIVERED'}}
+       <td>
+      <a href="/return-order/{{this._id}}" >Return </a>
+      </td>
+      {{else}}
+      <td>
+        
+      </td>
+       {{/ifCound}}
+        {{/ifCound}}
+    </tr>
+
+     
+    
+   
+      {{/each}}
+  </tbody>
+</table>
+</div>
+
